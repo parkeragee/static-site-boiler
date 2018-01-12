@@ -6,7 +6,7 @@
 - `npm install` // install dependencies
 
 ### Development mode
-- `grunt`
+- `npm start`
 - Open [http://localhost:8000/](http://localhost:8000/)
 
 ### Build & deploy the website
