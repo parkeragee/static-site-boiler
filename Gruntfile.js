@@ -1,6 +1,14 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        connect: {
+            server: {
+                options: {
+                    post: 8000,
+                    hostname: '*'
+                }
+            }
+        },
         watch: {
             html: {
                 files: ['./index.html'],
@@ -24,7 +32,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/assets/styles.css': 'assets/styles/styles.scss'
+                    'assets/styles.css': 'assets/styles/styles.scss'
                 }
             }
         },
@@ -40,10 +48,20 @@ module.exports = function(grunt) {
                     'dist/index.html': './index.html'
                 }
             }
+        },
+        copy: {
+            main: {
+                expand: true,
+                src: 'assets/**/*',
+                dest: 'dist/'
+            }
         }
     });
-    grunt.registerTask('default', ['sass:dist', 'htmlmin', 'watch']);
+    grunt.registerTask('default', ['connect', 'sass:dist', 'htmlmin', 'watch']);
+    grunt.registerTask('build', ['sass:dist', 'htmlmin', 'copy']);
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 };
