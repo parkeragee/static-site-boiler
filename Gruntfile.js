@@ -44,9 +44,12 @@ module.exports = function(grunt) {
                     minifyJS: true,
                     minifyCSS: true
                 },
-                files: {
-                    'dist/index.html': './index.html'
-                }
+                files: [{
+                    expand: true,
+                    cwd: './',
+                    src: ['./**/*.html', '!./dist/*.html', '!./node_modules/**'],
+                    dest: './dist/'
+                }]
             }
         },
         copy: {
